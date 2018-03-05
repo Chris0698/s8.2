@@ -38,9 +38,10 @@ void controller(void) {
     send(buffer, strlen(buffer));
     size_t len = receive(buffer, sizeof(buffer));
     buffer[len]='\0';
-    lcd.locate(0,0);
-    lcd.printf(buffer);
     sscanf(buffer,"temperature:%f", &T);
+    lcd.locate(0,0);
+    lcd.printf("Temperature : %5.2f°C",T);
+
     if ( T<demand ) {
         strcpy(buffer,"heating:on\n");
         send(buffer, strlen(buffer));
